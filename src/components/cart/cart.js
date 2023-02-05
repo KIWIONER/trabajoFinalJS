@@ -45,11 +45,10 @@ const eliminarProductoCarrito = (productoId) => {
     actualizarTotalesCarrito(carrito);
 };
 
+
 const actualizarCarrito = (carrito) => {
     const contenedor = document.getElementById('carrito-contenedor');
-
     contenedor.innerHTML = '';
-
     carrito.forEach(producto => {
         const div = document.createElement('div');
         div.classList.add('productoEnCarrito');
@@ -58,10 +57,38 @@ const actualizarCarrito = (carrito) => {
             <p>Precio: ${producto.precio}€</p>
             <p id=cantidad${producto.id}>Cantidad: ${producto.cantidad}</p>
             <button class="btn waves-effect waves-ligth boton-eliminar" value="${producto.id}">X</button>
+            <button id="borrar-carrito${producto.id}">Vaciar carrito</button>
         `
         contenedor.appendChild(div);
     });
 };
+
+/*vaciarCarrito.addEventListener('click',(e) => {
+        
+            vaciarCarrito.remove(carrito)
+    actualizarCarrito(carrito);
+    });
+*/
+vaciarCarrito.addEventListener(`click`, () => {
+    if (carrito.length===0) {
+        Swal.fire ({
+            icon:"error",
+            text:"El carrito ya esta vacio",
+            showConfirmButton: false,
+            timer: 2000
+        })
+    } else {
+    carrito.length = 0
+    Swal.fire({
+        icon:"success",
+        text:"Carrito vaciado con exito",
+        showConfirmButton: false,
+        timer: 2000
+    })
+    }
+    actualizarCarrito(carrito);
+    actualizarTotalesCarrito(carrito);
+})
 
 const guardarCarritoStorage = (carrito) => {
     localStorage.setItem('carrito', JSON.stringify(carrito));
