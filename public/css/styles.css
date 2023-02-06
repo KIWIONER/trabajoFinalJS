@@ -162,8 +162,11 @@ select {
 
 .boton-eliminar {
   background-color: white;
+  margin:3px;
+  padding:3px;
   color: #000000;
-  border: none;
+  border: 5px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
   font-size: 20px;
 }
 
